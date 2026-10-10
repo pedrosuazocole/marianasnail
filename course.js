@@ -42,4 +42,70 @@ modules.forEach((m,mi)=>{
 });
 
 modules.forEach((m,i)=>{m.videoEmbed=videoLibrary[i];});
+
+// Guía de estudio extendida: cada lección incorpora objetivos, secuencia, control de calidad y reflexión.
+const advancedGuides = [
+ [
+  ['Diferencia la placa ungueal, el lecho, la matriz y el hiponiquio. La matriz produce las células que forman la lámina; dañarla puede modificar el crecimiento futuro. La piel que rodea la uña es una barrera protectora, no una superficie que deba retirarse para que el esmalte luzca limpio.','Observa fotografías de uñas sanas y elabora un dibujo con cinco estructuras. Describe qué partes se encuentran bajo la piel y cuáles son visibles sin instrumentos.','No confundas cutícula adherida a la superficie con piel viva del pliegue proximal. Si hay dolor, sangrado o cambios inexplicables, suspende la intervención.'],
+  ['La limpieza elimina residuos; la desinfección disminuye microorganismos en instrumental compatible. Estos procesos no son equivalentes y deben seguirse las instrucciones del fabricante, incluido tiempo de contacto. Instrumentos porosos de un solo uso no se comparten entre personas.','Organiza tres zonas: instrumentos limpios, área de trabajo y elementos usados. Prepara una ficha que registre producto desinfectante, dilución, tiempo de contacto y fecha de preparación cuando corresponda.','Nunca mezcles desinfectantes ni confíes en lámparas UV de curado como método de esterilización.'],
+  ['La inspección previa considera color, continuidad, dolor, engrosamiento, desprendimiento de la uña y lesiones de piel. Una técnica de uñas observa, documenta y deriva; no diagnostica hongos ni receta tratamientos.','Ensaya cinco casos simulados: uña sana, inflamación, despegamiento, herida y cambio importante de color. Decide si prestarías el servicio y explica por qué.','Cubrir una alteración con gel o acrílico puede retrasar la evaluación adecuada.']
+ ],
+ [
+  ['Las limas se diferencian por abrasividad: cuanto menor el número de grano, más agresivo suele ser el limado. La elección depende de material, espesor y procedimiento, no solamente de velocidad.','Ordena tus abrasivos por uso previsto en producto artificial y uña natural. Practica movimientos controlados sobre tips para identificar cuánta superficie se elimina.','El desgaste excesivo genera sensibilidad y reduce la protección natural.'],
+  ['Una buena preparación elimina suciedad y permite trabajar con precisión sin adelgazar la lámina. La forma del borde libre debe respetar anatomía, simetría y comodidad de la clienta.','Ejecuta una lista de preparación en 10 tips: evaluación, higiene, forma, retirada de polvo y revisión de bordes. Compara fotos antes y después.','No cortes tejido vivo ni hagas presión fuerte sobre la placa.'],
+  ['El torno facilita determinadas tareas sobre producto artificial, pero también puede provocar fricción, quemaduras, heridas y aerosoles de polvo. La fresa adecuada depende del material y formación de la profesional.','Identifica forma, abrasividad, giro y propósito de cada fresa sin usarla en una persona. Practica únicamente en materiales de entrenamiento y con extracción de polvo.','No utilices torno sobre piel o uña natural sin instrucción práctica presencial.']
+ ],
+ [
+  ['El servicio comienza con evaluación, higiene, planificación de forma y elección de productos compatibles. Base, pigmento y top coat cumplen funciones diferentes; el orden influye en adherencia y duración.','Construye una lista de insumos y prepara tu mesa antes de empezar. Cronometra las etapas para distinguir preparación, aplicación y secado.','Evita contaminación cruzada entre envases y herramientas.'],
+  ['La uniformidad depende de la cantidad de esmalte, la presión del pincel y el control en la zona proximal. Capas demasiado gruesas pueden arrugarse, burbujear o tardar mucho más en secar.','Practica dos capas finas sobre cinco tips y fotografía desde arriba y de perfil. Revisa bordes, transparencias y manchas.','No apliques producto sobre piel ni corrijas con instrumentos cortantes.'],
+  ['El acabado comercial debe lucir parejo, respetar laterales y no dejar exceso de producto en el borde libre. Un buen cierre incluye indicaciones de cuidado y registro de tiempo y consumo.','Realiza tres servicios simulados y crea una rúbrica: simetría, cobertura, limpieza, presentación y duración.','No prometas una duración idéntica para todas las clientas.']
+ ],
+ [
+  ['El esmalte en gel necesita curado conforme al sistema específico. La potencia nominal de la lámpara, por sí sola, no demuestra compatibilidad: importan longitud de onda, geometría, espesor y formulación.','Anota marca, lote, instrucciones de curado y lámpara compatible para cada base, color y top.','El gel parcialmente curado puede aumentar el riesgo de sensibilización.'],
+  ['El control de la cantidad y la ausencia de contacto cutáneo son imprescindibles. La preparación suave, capas delgadas y tiempos correctos permiten evaluar mejor el acabado.','Crea una ficha de proceso: inspección, preparación, base, color, top, tiempos de curado por capa y revisión final. Practica sobre tips.','Nunca uses el ardor como señal de curado correcto. Ante reacción, detén el servicio.'],
+  ['La retirada cambia según si el producto es soak-off o requiere limado profesional. Arrancar o despegar mecánicamente el gel puede llevarse capas de la placa ungueal.','Estudia la ficha de retirada del fabricante y redacta un protocolo con protección de piel, tiempo, residuos y revisión de la uña.','No forces el material adherido ni lo levantes con objetos metálicos.']
+ ],
+ [
+  ['La nivelación busca una superficie visualmente equilibrada con cantidad razonable de producto. El resultado se evalúa de perfil y frontalmente, observando zona central, laterales y punta.','Compara tres tips con diferente cantidad de base y registra cómo cambia la silueta.','Un grosor excesivo puede causar problemas de estética y curado.'],
+  ['Las bases de refuerzo tienen viscosidades distintas y no todas sirven para las mismas técnicas. Un producto autoconsolidante se desplaza por gravedad y exige controlar cantidad y posición.','Practica la distribución sobre tips y compara perfil antes y después con fotografías.','Evita que el producto toque la piel y sigue el protocolo de curado.'],
+  ['Una buena revisión considera equilibrio, lisura, bordes, ausencia de burbujas y curado completo. La corrección debe ser mínima y respetar la salud de la uña.','Usa una lista de seis puntos para revisar tus aplicaciones y determina el cambio principal para tu próxima práctica.','No encubras desprendimientos ni molestias bajo una nueva capa.']
+ ],
+ [
+  ['El acrílico surge de una reacción entre líquido monómero y polvo polímero. El comportamiento cambia con proporciones, temperatura, marca y tamaño de perla; no existe una mezcla universal.','Forma 20 perlas sobre papel de práctica y clasifícalas: húmeda, manejable y seca.','Trabaja con ventilación y evita contacto de monómero con piel.'],
+  ['El pincel transporta líquido; el contacto con el polvo forma la perla. Controlar escurrimiento y colocación permite que el material se modele sin invadir pliegues.','Realiza 20 perlas adicionales de tamaños distintos sobre soporte, midiendo tiempo de trabajo de tu sistema.','No trabajes con monómeros desconocidos ni formulaciones con MMA para uñas.'],
+  ['El acabado debe conservar zonas de tensión adecuadas sin montículos grandes cerca de cutícula. El punto de tensión depende de longitud y tipo de extensión.','Evalúa cinco piezas de entrenamiento desde perfil, frente y planta.','La práctica en clientas debe venir después de dominar manejo de producto y bioseguridad.']
+ ],
+ [
+  ['Los tips son extensiones prefabricadas; los moldes permiten construir longitud usando una guía. Selección y adaptación dependen de anchura, curvatura y crecimiento natural.','Clasifica diez tips por tamaño y practica alineación en mano de entrenamiento.','No fuerces la uña natural para acomodar una extensión incompatible.'],
+  ['La arquitectura combina eje longitudinal, laterales, zona de tensión y borde libre. Un diseño bonito pero desbalanceado puede engancharse o romperse.','Dibuja perfiles correctos e incorrectos y monta dos extensiones cortas de práctica.','Empieza con longitudes cortas antes de estilos extremos.'],
+  ['El adhesivo y el acrílico deben mantenerse lejos de piel y mucosas. Antes del servicio revisa integridad del tip, conexión y estabilidad.','Completa un juego de cinco extensiones artificiales con fotografías de tres ángulos.','No utilices pegamentos no destinados a cosmética de uñas.']
+ ],
+ [
+  ['La forma cuadrada exige laterales paralelos y borde recto; la almendra transita hacia una punta suavizada; coffin estrecha laterales con extremo plano. La simetría debe verse desde arriba y desde el frente.','Dibuja plantillas y reproduce tres formas en tips ya extendidos.','No sacrifiques estructura solo por obtener una silueta fina.'],
+  ['El limado refina superficie y contorno. Exceso de presión o abrasivo sobre placa natural puede lesionarla y generar desprendimiento posterior.','Realiza un mapa de zonas de limado en una uña artificial, diferenciando estructura y acabado.','Retira polvo correctamente y utiliza extracción adecuada.'],
+  ['Un control de calidad profesional evalúa grosor, equilibrio, laterales, ápice, confort y uniformidad. Deben documentarse cambios para la siguiente práctica.','Fotografía cinco uñas con la misma iluminación e identifica tres mejoras concretas.','No ignores dolor o calor durante el proceso.']
+ ],
+ [
+  ['El mantenimiento se programa según crecimiento, adherencia, estado del producto y rutina de la clienta. No todas las uñas requieren relleno en el mismo intervalo.','Crea una ficha de seguimiento con fecha de aplicación, materiales, incidentes y próxima revisión.','Si hay desprendimiento con humedad retenida o alteraciones, evita sellar la zona.'],
+  ['El levantamiento puede asociarse a preparación, estructura, incompatibilidad o exposición mecánica. Corregir exige identificar la causa, no cubrir simplemente la separación.','Analiza cuatro fotografías de práctica y plantea decisiones de mantenimiento o retirada.','No encapsules áreas con sospecha de infección.'],
+  ['La retirada debe minimizar trauma, polvo y exposición química, conforme al sistema específico. El objetivo es preservar placa y piel, no terminar en el menor tiempo posible.','Redacta un protocolo de retirada con evaluación, protección, método correcto y cuidados posteriores.','Nunca arranques el acrílico por palanca.']
+ ],
+ [
+  ['Una French consistente requiere línea de sonrisa limpia, proporción con longitud y separación clara entre base y punta. La preparación del pincel evita líneas temblorosas.','Diseña cinco French de distinto grosor sobre tips.','Practica precisión antes de añadir decoraciones complejas.'],
+  ['Baby boomer crea una transición degradada entre tonos. La consistencia nace de controlar cantidad, secuencia y herramienta de difusión.','Realiza tres degradados y califícalos por suavidad de transición.','Evita capas de gel demasiado gruesas para acelerar el degradado.'],
+  ['Los detalles de nail art deben ser apropiados para la superficie, el producto y la duración deseada. Glitter, cromados y adornos aumentan costo y tiempo del servicio.','Prepara un muestrario de 20 diseños con tiempo y costo estimado.','Los elementos voluminosos no deben generar bordes peligrosos.']
+ ],
+ [
+  ['Un servicio móvil exige estación segura, superficie lavable, ventilación, luz suficiente y capacidad de transporte de residuos. Antes de iniciar confirma condiciones de trabajo y evita lugares cerrados sin ventilación.','Crea un inventario portátil y simula montaje y desmontaje del área en 15 minutos.','No improvises higiene ni ventilación por ahorrar traslados.'],
+  ['La ficha de clienta registra consentimiento, expectativas, antecedentes relevantes para el servicio y observaciones de la uña, minimizando datos personales. El precio y la duración deben comunicarse antes de comenzar.','Diseña un guion de bienvenida, lista de contraindicaciones visibles y confirmación de servicio.','Mantén la información privada y solicita permiso para fotografías.'],
+  ['Una experiencia profesional termina con instrucciones de cuidado, fotografías autorizadas y seguimiento respetuoso. El registro de consumos permite calcular precios futuros y disminuir desperdicio.','Simula dos citas con agenda, costos, duración y mensaje posterior.','No prometas resultados médicos ni duraciones garantizadas.']
+ ],
+ [
+  ['La rentabilidad depende del precio cobrado menos los costos variables, además de gastos fijos y remuneración por tu tiempo. Separar finanzas personales del negocio permite medir resultados reales.','Calcula costo, margen y tarifa para tres servicios incluyendo transporte y tiempo.','No uses únicamente el precio de la competencia para fijar tarifas.'],
+  ['Un portafolio comercial debe mostrar trabajos reales sin retocar características esenciales. La descripción de servicios necesita alcance, precio, condiciones de cita y cuidados posteriores.','Construye una ficha comercial por servicio y cinco fotos propias con autorización.','No uses fotos ajenas como si fueran trabajos realizados por ti.'],
+  ['La venta digital requiere un recorrido claro: descubrimiento, confianza, consulta, cita, pago y fidelización. Mide conversiones y no solo visualizaciones.','Diseña un calendario de publicaciones de cuatro semanas y define dos indicadores de resultados.','Evita promociones que dejen margen negativo o testimonios ficticios.']
+ ]
+];
+modules.forEach((m,mi)=>m.lessons.forEach((l,li)=>{const g=advancedGuides[mi][li];l[3]=`${l[3]}\n\nFUNDAMENTOS Y CRITERIO TÉCNICO: ${g[0]}\n\nPROCEDIMIENTO DE ESTUDIO: ${g[1]}\n\nSEGURIDAD Y ERRORES FRECUENTES: ${g[2]}`;}));
+
 module.exports={modules,canvas,strategies};

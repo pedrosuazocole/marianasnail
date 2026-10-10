@@ -70,3 +70,7 @@ Este programa no equivale a acreditación oficial. No realizar servicios en uña
 
 ## Novedades 1.4.0
 Mi Negocio: Lean Canvas editable, simulador de costos, rentabilidad y equilibrio, protocolo, checklist y exportación JSON. Marketing Digital: cinco estrategias, calendario de 4 semanas, textos copiables y medidor de campañas. Las configuraciones se guardan solo en el navegador por usuario: utiliza el botón de exportación para conservar una copia. El despliegue no requiere nuevas variables ni migraciones.
+
+
+## v1.5.0: prueba de 5 días
+Las cuentas nuevas creadas con “Probar gratis” tienen 120 horas de acceso a una lección de muestra. El resto se desbloquea tras confirmar el pago y activar el registro en `enrollments`. Para las cuentas existentes se conserva el acceso completo, por lo que es importante revisar las cuentas anteriores antes de cobrar. El endpoint administrativo autenticado `POST /api/admin/enrollment` recibe `{user_id, status:"active"}` para activar después de verificar un pago; todavía requiere interfaz de administración. No es un sistema automático de facturación.
