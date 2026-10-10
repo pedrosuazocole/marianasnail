@@ -57,3 +57,12 @@ Este programa no equivale a acreditación oficial. No realizar servicios en uña
 5. Asegura la privacidad y la política de retención antes de pedir el DNI y dirección a estudiantes reales. Usa contraseñas seguras y restringe acceso a los respaldos.
 
 **Esta distribución no puede modificar automáticamente tu servicio Railway ni hacer el push a tu cuenta**: debes reemplazar los archivos del repo conectado y redesplegar. No introduzcas tu contraseña personal ni credenciales reales en el ZIP.
+
+
+## Corrección 1.2.1: videos y encabezado
+- El video de cada módulo ahora está en una tarjeta completa, con iframe de YouTube visible dentro de la clase. YouTube puede bloquear algunos videos externos; en ese caso hay enlace alternativo.
+- Corregido el encabezado lateral: ya no se duplica el nombre de la academia junto al logo.
+- Indicador `v1.2.1` en barra superior, y rutas de CSS/JS con versión para evitar archivos anteriores almacenados en el navegador.
+- Para desplegar, sube **el contenido interior** de esta carpeta a la raíz del repositorio conectado a Railway (no subas únicamente el ZIP). Haz commit/push, verifica que Railway muestre Deployment Success y comprueba la insignia v1.2.1 en el encabezado. Si no se ve, sigue publicada la versión anterior.
+- No borres el volumen SQLite ni sustituyas la base de datos. Crea un respaldo previo.
+- Por seguridad, cambia la contraseña compartida en la conversación; no se guardó ninguna contraseña en este paquete.
