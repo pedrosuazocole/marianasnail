@@ -66,3 +66,7 @@ Este programa no equivale a acreditación oficial. No realizar servicios en uña
 - Para desplegar, sube **el contenido interior** de esta carpeta a la raíz del repositorio conectado a Railway (no subas únicamente el ZIP). Haz commit/push, verifica que Railway muestre Deployment Success y comprueba la insignia v1.2.1 en el encabezado. Si no se ve, sigue publicada la versión anterior.
 - No borres el volumen SQLite ni sustituyas la base de datos. Crea un respaldo previo.
 - Por seguridad, cambia la contraseña compartida en la conversación; no se guardó ninguna contraseña en este paquete.
+
+
+## Novedades 1.4.0
+Mi Negocio: Lean Canvas editable, simulador de costos, rentabilidad y equilibrio, protocolo, checklist y exportación JSON. Marketing Digital: cinco estrategias, calendario de 4 semanas, textos copiables y medidor de campañas. Las configuraciones se guardan solo en el navegador por usuario: utiliza el botón de exportación para conservar una copia. El despliegue no requiere nuevas variables ni migraciones.
