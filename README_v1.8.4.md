@@ -1,0 +1,1 @@
+Actualización incremental: conserva volumen SQLite, respaldo previo obligatorio. Corrige separadores faltantes e incorpora tres recursos; los enlaces no están verificados embebidos. Publicación: reemplazar archivos, commit/push GitHub y revisar Railway. No sobrescribir el volumen. Revisar `AUDITORIA_v1.8.4.md`.

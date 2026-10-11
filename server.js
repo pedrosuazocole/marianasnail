@@ -19,6 +19,45 @@ db.exec(`CREATE TABLE IF NOT EXISTS certificate_profiles(user_id INTEGER PRIMARY
 // Trial migration: existing students remain enrolled. New public sign-ups get five days of sample access.
 db.exec(`CREATE TABLE IF NOT EXISTS enrollments(user_id INTEGER PRIMARY KEY, status TEXT NOT NULL DEFAULT 'active', trial_started_at INTEGER, trial_expires_at INTEGER, approved_at INTEGER);`);
 function accessState(u){if(u.role==='admin')return {kind:'full',trialDays:5};const e=db.prepare('SELECT * FROM enrollments WHERE user_id=?').get(u.id);if(!e)return {kind:'full',trialDays:5};if(e.status==='active')return {kind:'full',trialDays:5};if(e.status==='trial'&&e.trial_expires_at>Date.now())return {kind:'trial',trialDays:5,expiresAt:e.trial_expires_at};return {kind:'expired',trialDays:5};}
+// Videoteca administrable. Tabla independiente: preserva estudiantes, certificados y avances.
+db.exec(`CREATE TABLE IF NOT EXISTS demonstration_videos(module_id INTEGER NOT NULL,lesson_id INTEGER NOT NULL,youtube_id TEXT NOT NULL UNIQUE,title TEXT NOT NULL,review_status TEXT NOT NULL DEFAULT 'pending' CHECK(review_status IN ('pending','reviewed')),updated_at TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(module_id,lesson_id));`);
+// Conserva cuatro tutoriales identificados en versiones anteriores. Estado pendiente hasta revisión humana.
+if(db.prepare('SELECT COUNT(*) n FROM demonstration_videos').get().n===0){
+ const legacy=[[4,2,'_e3jRP3PPwo','Aplicación de esmalte semipermanente — Art and Beauty Vicky'],[5,2,'j6kvI9v4_JY','Nivelación rubber base — Dan’s Nails Official'],[5,3,'7Dib3879JGw','Nivelación de uñas convexas — Lucy Studio'],[6,2,'TM47PFMaqdE','Perlas acrílicas — Young Nails en Español']];
+ const add=db.prepare('INSERT OR IGNORE INTO demonstration_videos(module_id,lesson_id,youtube_id,title,review_status) VALUES(?,?,?,?,?)');for(const v of legacy)add.run(...v,'pending');
+}
+// Enlaces identificados en fuentes públicas. Solo insertar en casillas vacías; nunca sobrescribir decisiones del administrador.
+// Estado pendiente: no se ha confirmado reproducción embebida ni revisado exhaustivamente el procedimiento.
+const curatedCandidates = [
+ [3,1,'YgiwvMPtFWo','Manicura tradicional paso a paso — Dianna Pizarro'],
+ [6,1,'BH4MpUJfYNc','Fundamentos de aplicación acrílica para principiantes — Young Nails en Español'],
+ [9,3,'XjSHADy9W9o','Retirada de uñas acrílicas — Melisa Rocha'],
+ [10,2,'Mp_X5-rDQ3Y','Diseño francés con sello — Decora8 Nail'],
+ [2,1,'7SXdTRBr9IU','Tipos de limas para uñas y sus gramajes — Lis Star Nails'],
+ [9,1,'-4vk8P-4pvg','Relleno de uñas acrílicas paso a paso — Nancy Guzman'],
+ [10,3,'rRrAPtElgWg','Nail art Baby Boomer paso a paso — Thuya Professional Line'],
+ [1,2,'_xXux_YtBJM','Limpieza previa del instrumental — Mely Orozco Sánchez'],
+ [2,2,'D6DF-t313Ig','Preparación de uña natural — JMNail'],
+ [7,3,'hAb6QlYo3E8','Glitter encapsulado en extensiones con tip — NailsByKaren'],
+ [5,1,'vCsFGS2Nuwo','Introducción a Rubber Base y Builder Gel — Dan’s Nails Official'],
+ [7,1,'jc7rU8v32tc','Aplicación de uñas acrílicas para principiantes — Yudianela'],
+ [7,2,'R2bXfFsP8M4','Aplicación de uñas acrílicas paso a paso — Bowser Malo'],
+ [ 1,1,'_KCFwvLcZvs','Anatomía de la uña — Alondra Nails 4' ],
+ [ 2,3,'g2uxGiz6dC8','Uso del torno y fresas — Polina Asmetkina (revisar corrección indicada por autora)' ],
+ [ 8,2,'pqUo7VN9Gwo','Limado y revisión de estructura acrílica — Arla Nails Beauty' ],
+ [ 8,3,'g0bAdCJFBU0','Perfeccionamiento del limado acrílico — Nails By Val' ],
+ [4,3,'W7-PSrb4noM','Retirada de esmalte semipermanente para principiantes — JakelinBeauty Nails'],
+ [10,1,'T76T8jp9B-c','Nail art básico: líneas, puntos y flores — Nail Art By Andy'],
+ [3,2,'OFK-3QF0eCs','Manicura básica paso a paso: preparación, color y acabado — kittypinky'],
+ [3,3,'r2Yy0QUb0Mo','Manicura natural: base, color y top coat — Uñas Cortas y Más'],
+ [4,1,'Jc_YkEuVEcY','Lámparas UV/LED para uñas: tipos y diferencias — Melisa Rocha (complemento, verificar compatibilidad con fabricante)'],
+ [12,3,'aVb2wcUzSjA','WhatsApp Business: catálogo y respuestas automáticas — Konfío (complemento comercial)']
+];
+for(const v of curatedCandidates){
+ const exists=db.prepare('SELECT 1 FROM demonstration_videos WHERE module_id=? AND lesson_id=?').get(v[0],v[1]);
+ if(!exists)db.prepare('INSERT OR IGNORE INTO demonstration_videos(module_id,lesson_id,youtube_id,title,review_status) VALUES(?,?,?,?,?)').run(...v,'pending');
+}
+function videoId(raw){let v=String(raw||'').trim();if(/^[A-Za-z0-9_-]{11}$/.test(v))return v;try{const u=new URL(v);const h=u.hostname.toLowerCase().replace(/^www\./,'');if(h==='youtu.be')v=u.pathname.split('/')[1]||'';else if(h==='youtube.com'||h==='m.youtube.com'||h==='youtube-nocookie.com')v=u.searchParams.get('v')||(u.pathname.match(/^\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})/)||[])[1]||'';else return null;return /^[A-Za-z0-9_-]{11}$/.test(v)?v:null}catch{return null}}
 const attempts=new Map();
 function send(res,status,obj,headers={}){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers});res.end(JSON.stringify(obj))}
 function cookies(req){return Object.fromEntries((req.headers.cookie||'').split(';').map(x=>x.trim().split('=').map(decodeURIComponent)).filter(x=>x.length===2))}
@@ -54,8 +93,27 @@ const server=http.createServer(async(req,res)=>{const url=new URL(req.url,'http:
  if(!u){if(p.startsWith('/api/'))return send(res,401,{error:'Inicia sesión'});return staticFile(req,res,p)}
  if(m!=='GET'&&p.startsWith('/api/')&&req.headers['x-csrf-token']!==u.csrf)return send(res,403,{error:'Sesión de seguridad inválida. Actualiza la página.'});
  if(p==='/api/logout'&&m==='POST'){const c=cookies(req).mn_session;db.prepare('DELETE FROM sessions WHERE tokenhash=?').run(sha(c));return send(res,200,{ok:true},{'Set-Cookie':cookie(req,'',0)})}
+ if(p==='/api/admin/videos'&&m==='GET'){
+  if(u.role!=='admin')return send(res,403,{error:'Solo administración'});
+  return send(res,200,{videos:db.prepare('SELECT module_id,lesson_id,youtube_id,title,review_status,updated_at FROM demonstration_videos ORDER BY module_id,lesson_id').all(),lessons:modules.flatMap((mod,mi)=>mod.lessons.map((lesson,li)=>({module_id:mi+1,module_title:mod.title,lesson_id:li+1,lesson_title:lesson[0]})))});
+ }
+ if(p==='/api/admin/videos'&&m==='POST'){
+  if(u.role!=='admin')return send(res,403,{error:'Solo administración'});
+  const b=await readBody(req),moduleId=Number(b.module_id),lessonId=Number(b.lesson_id),id=videoId(b.url),title=String(b.title||'').trim(),status=b.review_status==='reviewed'?'reviewed':'pending';
+  if(!Number.isInteger(moduleId)||moduleId<1||moduleId>12||!Number.isInteger(lessonId)||lessonId<1||lessonId>3||!id||title.length<6||title.length>180)return send(res,400,{error:'Verifica módulo, lección, enlace válido de YouTube y título (6 a 180 caracteres).'});
+  const duplicate=db.prepare('SELECT module_id,lesson_id FROM demonstration_videos WHERE youtube_id=?').get(id);
+  if(duplicate&&(duplicate.module_id!==moduleId||duplicate.lesson_id!==lessonId))return send(res,409,{error:`Video repetido: ya pertenece al módulo ${duplicate.module_id}, lección ${duplicate.lesson_id}.`});
+  db.prepare(`INSERT INTO demonstration_videos(module_id,lesson_id,youtube_id,title,review_status) VALUES(?,?,?,?,?) ON CONFLICT(module_id,lesson_id) DO UPDATE SET youtube_id=excluded.youtube_id,title=excluded.title,review_status=excluded.review_status,updated_at=CURRENT_TIMESTAMP`).run(moduleId,lessonId,id,title,status);
+  return send(res,200,{ok:true});
+ }
+ if(p==='/api/admin/videos'&&m==='DELETE'){
+  if(u.role!=='admin')return send(res,403,{error:'Solo administración'});
+  const b=await readBody(req),moduleId=Number(b.module_id),lessonId=Number(b.lesson_id);
+  if(!Number.isInteger(moduleId)||!Number.isInteger(lessonId))return send(res,400,{error:'Lección inválida'});
+  db.prepare('DELETE FROM demonstration_videos WHERE module_id=? AND lesson_id=?').run(moduleId,lessonId);return send(res,200,{ok:true});
+ }
  if(p==='/api/course'&&m==='GET'){
- const a=accessState(u);const visible=a.kind==='full'?modules:modules.map((mod,i)=>i===0&&a.kind==='trial'?{...mod,lessons:mod.lessons.slice(0,1),videos:mod.videos.slice(0,1),practice:'Lección de demostración para explorar la academia.'}:{...mod,lessons:[],videos:[],practice:'Disponible con matrícula activa.'});return send(res,200,{modules:visible,canvas:a.kind==='full'?canvas:[],strategies:a.kind==='full'?strategies:[],access:a});
+ const a=accessState(u);const demo=db.prepare('SELECT module_id,lesson_id,youtube_id,title,review_status FROM demonstration_videos').all();const enriched=modules.map((mod,mi)=>({...mod,demonstrations:mod.lessons.map((_,li)=>demo.find(v=>v.module_id===mi+1&&v.lesson_id===li+1)||null)}));const visible=a.kind==='full'?enriched:enriched.map((mod,i)=>i===0&&a.kind==='trial'?{...mod,lessons:mod.lessons.slice(0,1),videos:mod.videos.slice(0,1),demonstrations:mod.demonstrations.slice(0,1),practice:'Lección de demostración para explorar la academia.'}:{...mod,lessons:[],videos:[],practice:'Disponible con matrícula activa.'});return send(res,200,{modules:visible,canvas:a.kind==='full'?canvas:[],strategies:a.kind==='full'?strategies:[],access:a});
  }
  if(p==='/api/progress'&&m==='GET')return send(res,200,{progress:db.prepare('SELECT module_id,completed,score,notes FROM progress WHERE user_id=?').all(u.id)});
  if(p==='/api/progress'&&m==='POST'){

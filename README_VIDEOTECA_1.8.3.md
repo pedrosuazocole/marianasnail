@@ -1,0 +1,1 @@
+Actualización incremental v1.8.3. Respalde DATA_DIR/academy.sqlite y el volumen Railway antes de desplegar. No borre DATA_DIR. Compruebe la reproducción de cada enlace nuevo y su utilidad técnica. 14 videos candidatos únicos; 22 pendientes.

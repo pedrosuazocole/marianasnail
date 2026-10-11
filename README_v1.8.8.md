@@ -1,0 +1,1 @@
+Actualización incremental de Mariana Nails Academy: 2 referencias complementarias (4.1 y 12.3). Total 27 enlaces únicos, 9 pendientes. Incluye AUDITORIA_v1.8.8.md y REPORTE_VIDEOTECA_v1.8.8.csv. No modifica la base existente ni reemplaza enlaces administrativos. Respaldar SQLite antes de desplegar.
