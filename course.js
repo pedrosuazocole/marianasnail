@@ -1,17 +1,25 @@
 const search = q => 'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
-const videoLibrary = [
- {id:'65JfF4qE75E',title:'Preparación de uñas naturales — Luisa González'},
- {id:'65JfF4qE75E',title:'Preparación de uñas naturales — Luisa González'},
- {id:'_e3jRP3PPwo',title:'Aplicación de esmaltado — video de apoyo'},
- {id:'_e3jRP3PPwo',title:'Esmaltado semipermanente — video de apoyo'},
- {id:'j6kvI9v4_JY',title:'Nivelación con rubber base — video de apoyo'},
- {id:'TM47PFMaqdE',title:'Perlas acrílicas — Young Nails en Español'},
- {id:'fq1ZgQK4_AA',title:'Técnica de perlas acrílicas — Carolina Ibarra'},
- {id:'TM47PFMaqdE',title:'Control y limado — fundamentos del acrílico'},
- {id:'SL0Gc8Cy9Qg',title:'Preparación y cuidado — video de apoyo'},
- {id:'j6kvI9v4_JY',title:'Técnica de gel — video de apoyo'},
- {id:'65JfF4qE75E',title:'Demostración técnica — video de apoyo'},
- {id:'TM47PFMaqdE',title:'Técnica profesional — video de apoyo'}
+// Videoteca curada: IDs únicos globalmente. Solo se incrustan recursos comprobados en fuentes públicas.
+// Los módulos pendientes muestran búsqueda por tema, nunca un video incorrecto.
+const verifiedVideos = {
+  3: {id:'_e3jRP3PPwo',title:'Aplicación de esmalte semipermanente — tutorial de apoyo',source:'Art and Beauty Vicky'},
+  4: {id:'j6kvI9v4_JY',title:'Nivelación con rubber base — demostración',source:'Dan’s Nails Official'},
+  5: {id:'7Dib3879JGw',title:'Nivelación de uñas convexas con rubber base',source:'Lucy Studio'},
+  6: {id:'TM47PFMaqdE',title:'Perlas acrílicas para principiantes',source:'Young Nails en Español'}
+};
+const moduleSearchQueries = [
+ 'anatomía de la uña bioseguridad manicure curso profesional',
+ 'herramientas manicura preparación de uña natural tutorial seguro',
+ 'manicura tradicional esmaltado paso a paso principiantes',
+ 'esmaltado semipermanente base top curado compatible tutorial',
+ 'rubber base nivelación uñas naturales tutorial',
+ 'perlas acrílicas relación monómero polímero uñas técnica',
+ 'extensiones de uñas con tips y moldes procedimiento principiante',
+ 'estructuras y formas limado uñas acrílicas paso a paso',
+ 'mantenimiento relleno y retirada segura de uñas acrílicas',
+ 'nail art french baby boomer uñas diseño principiante',
+ 'kit manicura a domicilio seguridad higiene atención clientas',
+ 'cómo fijar precios y crear negocio de uñas marketing digital'
 ];
 const modules = [
 {title:'Anatomía y bioseguridad',tag:'Fundamentos',duration:'5 h',overview:'Conocer la estructura de la uña y reconocer cuándo no se debe prestar un servicio.',lessons:[['Conoce tu área de trabajo','La placa ungueal es la parte visible; bajo ella se encuentra el lecho. La matriz produce la uña, el hiponiquio protege el borde libre y el tejido proximal protege la zona de crecimiento.','Identifica placa, matriz, lecho, borde libre e hiponiquio en un esquema.'],['Higiene profesional','Lávate las manos; limpia los instrumentos antes de desinfectarlos conforme al producto y las normas aplicables. Desecha las limas porosas de un solo uso. Nunca reutilices consumibles desechables.','Escribe tu lista de verificación de limpieza y separación de utensilios.'],['Cuándo detener el servicio','No trabajes sobre uñas con infección sospechada, heridas, dolor, inflamación o alteraciones inexplicadas. Recomienda evaluación sanitaria. Ventila el área y controla el polvo.','Anota cinco señales para posponer una cita.']],materials:['Jabón','Desinfectante apropiado','Toallas desechables','Guantes según actividad','Cepillo de limpieza'],practice:'Prepara una estación limpia y dibuja un diagrama rotulado de la uña.',video:search('anatomía de la uña y bioseguridad manicurista clase'),quiz:{q:'¿Qué harías si observas una uña dolorosa e inflamada?',options:['Cubrirla con acrílico','Suspender el servicio y recomendar valoración','Limarla más fuerte'],answer:1}},
@@ -32,16 +40,14 @@ const strategies=[['Reels de transformación','Publica tres videos semanales mos
 const theoryAdditions=[["La anatomía sirve para diferenciar superficies resistentes de tejido vivo. La matriz está bajo la piel proximal y cualquier traumatismo allí puede alterar el crecimiento. La lámina ungueal no respira; su hidratación y resistencia dependen de múltiples factores.", "Distingue entre limpiar, desinfectar y esterilizar: no son equivalentes. Primero retira restos visibles; después aplica un desinfectante etiquetado y respeta su dilución y tiempo de contacto. Los utensilios porosos desechables no deben compartirse.", "La técnica de uñas no diagnostica patologías. Cambios de color, separación de la placa, enrojecimiento, pus o dolor son motivos para no cubrir la uña con productos cosméticos. Sugiere evaluación profesional sin intentar tratarla."], ["La numeración del grano indica abrasividad; una lima inadecuada puede adelgazar la placa natural y causar sensibilidad. Reserva abrasivos más ásperos para materiales artificiales, nunca para desgastar excesivamente la uña propia.", "La preparación inicia con entrevista breve y observación, continúa con forma del borde libre, limpieza y eliminación cuidadosa de residuos. Es preferible repetir movimientos suaves que intentar resolver todo con presión.", "El torno requiere formación práctica específica. La fricción concentrada puede quemar la uña y la piel; el polvo se inhala si no hay extracción. Aprende dirección, velocidad, control y soporte primero sobre material sintético."], ["Un protocolo repetible ayuda a mantener resultados y tiempos: recepción, revisión, preparación, base, color, brillo y recomendaciones. Diferencia productos de secado al aire de los que necesitan curado UV/LED.", "Para distribuir el color de forma uniforme, carga poco producto, apoya el pincel con estabilidad y deja un margen limpio respecto a la piel. Capas delgadas minimizan burbujas, arrugas y demoras de secado.", "Antes de despedir a una clienta, comprueba bordes, laterales, textura, cobertura y simetría bajo buena luz. Registra duración, costo aproximado y duración percibida para mejorar cada servicio."], ["No basta mirar los vatios de la lámpara: importa que su longitud de onda y tiempos correspondan al fotoiniciador del producto. Un gel insuficientemente curado incrementa la exposición a compuestos no polimerizados y el riesgo de sensibilización.", "Evita que el gel toque la piel: si ocurre, retíralo antes del curado siguiendo las precauciones del producto. Trabaja en capas controladas y verifica las instrucciones de base, pigmento y top por separado.", "Nunca desprendas el gel tirando de él. Algunos sistemas son remojables y otros necesitan rebaje técnico; el procedimiento depende de la marca. Protege piel y placa y detén la retirada si hay dolor."], ["La nivelación busca que la superficie refleje una línea de luz uniforme, sin crear un bulto pesado. El volumen debe ser proporcional al largo de la uña y respetar zonas de crecimiento.", "El movimiento del pincel distribuye el gel; no sustituyas técnica con gran cantidad de producto. Controla tiempo de auto-nivelado y evita escurrimiento a pliegues laterales o cutícula.", "Evalúa la uña de frente y perfil. Un reborde exagerado, producto en piel o una lámpara incompatible son motivos para detenerse y corregir antes de finalizar."], ["Los sistemas de acrílico dependen de productos compatibles. Lee etiqueta y ficha de seguridad antes de abrir los envases. El monómero y el polvo deben estar diseñados para uso profesional sobre uñas.", "La consistencia de una perla depende del líquido retenido y la carga de polvo. Practica repetición sobre una superficie artificial y anota diferencias entre perlas muy húmedas, correctas y secas.", "La exposición a vapores y polvo exige ventilación y extracción adecuadas; el olor no mide por sí solo la seguridad. Almacena envases cerrados, lejos de calor, y evita contacto de líquidos con piel."], ["Un tip debe ajustarse de lateral a lateral sin presionar la placa. El molde permite construir sin pieza adherida, pero exige mayor control de alineación y curva. No fuerces un soporte que no encaje.", "La resistencia de la extensión procede de su geometría y distribución del material, no solo de añadir grosor. Mantén un largo conservador mientras desarrollas precisión y compara el eje de cada dedo.", "Examina desde arriba, perfil y punta para identificar desviaciones, paredes laterales irregulares y peso excesivo. Un buen resultado debe verse armónico y sentirse cómodo."], ["Las formas responden a necesidades estéticas y funcionales: cuadrada, oval, almendra y coffin producen diferentes distribuciones del borde libre. Comienza por cortas antes de crear estructuras elaboradas.", "La simetría se comprueba con varias perspectivas: al mirar solo desde arriba pueden ocultarse inclinaciones y excesos en el perfil. Limar demasiado puede comprometer la resistencia del conjunto.", "Un acabado profesional incluye superficie homogénea, contorno limpio y transición suave. Elimina polvo siguiendo higiene y termina solo cuando la forma está equilibrada."], ["El crecimiento natural mueve el producto hacia la punta y modifica los puntos de carga. El relleno no debe ocultar desprendimientos ni cambiar la estructura sin evaluación previa.", "Una separación entre material y uña puede retener humedad y residuos. No rellenes sobre levantamientos contaminados; evalúa si corresponde retirar el sistema y no continúes ante cambios sospechosos.", "Cada material requiere su técnica de retirada. Arrancar acrílico o gel arrastra capas de la placa natural; prioriza retirada controlada y seguimiento de instrucciones del fabricante."], ["Diseño comercial significa convertir una idea en una propuesta realizable y repetible: define paleta, grosor, simetría, duración y precio de cada acabado.", "Practica trazos y puntos primero en tips: apoya la mano, descarga producto del pincel y trabaja del trazo grande al detalle. La limpieza del instrumento influye en el resultado.", "Un muestrario organizado por dificultad y tiempo permite vender con expectativas claras. Fotografía en luz uniforme y publica solo trabajos auténticos con consentimiento."], ["El servicio móvil necesita superficies estables, suficiente iluminación, electricidad segura y ventilación apropiada. Una vivienda de la clienta no siempre reúne condiciones para acrílicos o torno.", "Una ficha de atención documenta alergias declaradas, contraindicaciones visibles, servicio elegido, productos, consentimiento y recomendaciones; evita recopilar datos que no necesites.", "Empaca herramientas limpias y usadas por separado, lleva consumibles desechables y confirma accesibilidad, zona, duración, traslado y tarifa antes de aceptar la cita."], ["El examen final integra habilidades: higiene, comunicación, procedimiento, acabado y autocorrección. Aprobar un cuestionario no demuestra por sí solo capacidad profesional supervisada.", "El precio necesita cubrir consumo real de producto, traslado, horas de trabajo, reposición, gastos indirectos y utilidad. Un servicio barato con desplazamiento largo puede producir pérdidas.", "Lanza primero una oferta pequeña de técnicas dominadas y mide consultas, reservas y repetición. WhatsApp Business y un portafolio real generan confianza más sostenible que prometer cualquier diseño."]];
 
 modules.forEach((m,mi)=>{
- m.lessons=m.lessons.map((l,li)=>{
-  const focus=theoryAdditions[mi][li];
-  return [l[0], l[1], l[2], focus];
- });
- // Shared supporting resources with disclosed overlaps. Actual videos depend on embedding permissions.
- const ids=[videoLibrary[mi],videoLibrary[(mi+3)%videoLibrary.length],videoLibrary[(mi+6)%videoLibrary.length]];
- m.videos=[...new Map(ids.map(v=>[v.id,v])).values()].slice(0,3);
+ m.lessons=m.lessons.map((l,li)=>[l[0],l[1],l[2],theoryAdditions[mi][li]]);
+ m.videos=verifiedVideos[mi]?[verifiedVideos[mi]]:[];
+ m.videoSearchQuery=moduleSearchQueries[mi];
+ m.videoReviewStatus=m.videos.length?'Enlace identificado; la inserción depende de YouTube':'Pendiente de selección y validación audiovisual';
 });
-
-modules.forEach((m,i)=>{m.videoEmbed=videoLibrary[i];});
+// Detectar asignaciones repetidas antes del arranque del servidor.
+const assignedVideoIds=modules.flatMap(m=>m.videos.map(v=>v.id));
+if(new Set(assignedVideoIds).size!==assignedVideoIds.length)throw Error('Videoteca: videos duplicados entre módulos');
 
 // Guía de estudio extendida: cada lección incorpora objetivos, secuencia, control de calidad y reflexión.
 const advancedGuides = [

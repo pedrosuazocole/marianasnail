@@ -86,3 +86,12 @@ Las cuentas nuevas creadas con “Probar gratis” tienen 120 horas de acceso a 
 
 ## WhatsApp comercial (v1.6.1)
 Landing conectada con WhatsApp Business: +504 9484 2151. Enlace: https://wa.me/50494842151. Se añadieron CTA, icono flotante, navegación, footer y preguntas frecuentes. Para cambiar el número busca 50494842151 en public/index.html.
+
+
+## v1.6.2 — Auditoría de videos
+
+- Eliminada la rotación automática de videos. Se verifican IDs únicos entre todos los módulos al iniciar.
+- Cuatro enlaces específicos están asignados a cuatro módulos (módulos 4, 5, 6, 7 en numeración visible de la plataforma). La disponibilidad o autorización del embedding no se puede garantizar.
+- Los otros ocho módulos presentan búsquedas temáticas etiquetadas como pendientes de validación. **No se presentan como si incluyeran videos propios o verificados.**
+- Antes de comercializar un curso, sustituir las búsquedas por demostraciones propias o videos con autorización y comprobar su pertinencia y reproducción.
+- No cambia estructura de SQLite ni datos persistidos. Mantener el volumen original en Railway.
