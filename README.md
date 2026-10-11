@@ -74,3 +74,15 @@ Mi Negocio: Lean Canvas editable, simulador de costos, rentabilidad y equilibrio
 
 ## v1.5.0: prueba de 5 días
 Las cuentas nuevas creadas con “Probar gratis” tienen 120 horas de acceso a una lección de muestra. El resto se desbloquea tras confirmar el pago y activar el registro en `enrollments`. Para las cuentas existentes se conserva el acceso completo, por lo que es importante revisar las cuentas anteriores antes de cobrar. El endpoint administrativo autenticado `POST /api/admin/enrollment` recibe `{user_id, status:"active"}` para activar después de verificar un pago; todavía requiere interfaz de administración. No es un sistema automático de facturación.
+
+
+## Landing comercial v1.6.0
+- `/` landing pública.
+- `/app` área privada (usuarios anteriores conservados).
+- `/app?registro=1` abre el registro de prueba por 5 días.
+- La promoción L 300 × 3 mensualidades y primeros 100 cupos está descrita en la landing pero **el sistema no cobra ni aplica cupos automáticamente**. La administradora debe registrar pagos confirmados en su propia contabilidad y aprobar la matrícula en Usuarios. No publiques datos bancarios en el código.
+- Para mostrar WhatsApp real, necesitarás aportar número empresarial y políticas de respuesta; se omite cualquier teléfono inventado.
+- Testimonios ficticios no incluidos. Agregar solo reseñas reales consentidas.
+
+## WhatsApp comercial (v1.6.1)
+Landing conectada con WhatsApp Business: +504 9484 2151. Enlace: https://wa.me/50494842151. Se añadieron CTA, icono flotante, navegación, footer y preguntas frecuentes. Para cambiar el número busca 50494842151 en public/index.html.
