@@ -1,26 +1,5 @@
 const search = q => 'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
-// Videoteca curada: IDs únicos globalmente. Solo se incrustan recursos comprobados en fuentes públicas.
-// Los módulos pendientes muestran búsqueda por tema, nunca un video incorrecto.
-const verifiedVideos = {
-  3: {id:'_e3jRP3PPwo',title:'Aplicación de esmalte semipermanente — tutorial de apoyo',source:'Art and Beauty Vicky'},
-  4: {id:'j6kvI9v4_JY',title:'Nivelación con rubber base — demostración',source:'Dan’s Nails Official'},
-  5: {id:'7Dib3879JGw',title:'Nivelación de uñas convexas con rubber base',source:'Lucy Studio'},
-  6: {id:'TM47PFMaqdE',title:'Perlas acrílicas para principiantes',source:'Young Nails en Español'}
-};
-const moduleSearchQueries = [
- 'anatomía de la uña bioseguridad manicure curso profesional',
- 'herramientas manicura preparación de uña natural tutorial seguro',
- 'manicura tradicional esmaltado paso a paso principiantes',
- 'esmaltado semipermanente base top curado compatible tutorial',
- 'rubber base nivelación uñas naturales tutorial',
- 'perlas acrílicas relación monómero polímero uñas técnica',
- 'extensiones de uñas con tips y moldes procedimiento principiante',
- 'estructuras y formas limado uñas acrílicas paso a paso',
- 'mantenimiento relleno y retirada segura de uñas acrílicas',
- 'nail art french baby boomer uñas diseño principiante',
- 'kit manicura a domicilio seguridad higiene atención clientas',
- 'cómo fijar precios y crear negocio de uñas marketing digital'
-];
+// 36 microlecciones originales hospedadas localmente, tres por módulo.
 const modules = [
 {title:'Anatomía y bioseguridad',tag:'Fundamentos',duration:'5 h',overview:'Conocer la estructura de la uña y reconocer cuándo no se debe prestar un servicio.',lessons:[['Conoce tu área de trabajo','La placa ungueal es la parte visible; bajo ella se encuentra el lecho. La matriz produce la uña, el hiponiquio protege el borde libre y el tejido proximal protege la zona de crecimiento.','Identifica placa, matriz, lecho, borde libre e hiponiquio en un esquema.'],['Higiene profesional','Lávate las manos; limpia los instrumentos antes de desinfectarlos conforme al producto y las normas aplicables. Desecha las limas porosas de un solo uso. Nunca reutilices consumibles desechables.','Escribe tu lista de verificación de limpieza y separación de utensilios.'],['Cuándo detener el servicio','No trabajes sobre uñas con infección sospechada, heridas, dolor, inflamación o alteraciones inexplicadas. Recomienda evaluación sanitaria. Ventila el área y controla el polvo.','Anota cinco señales para posponer una cita.']],materials:['Jabón','Desinfectante apropiado','Toallas desechables','Guantes según actividad','Cepillo de limpieza'],practice:'Prepara una estación limpia y dibuja un diagrama rotulado de la uña.',video:search('anatomía de la uña y bioseguridad manicurista clase'),quiz:{q:'¿Qué harías si observas una uña dolorosa e inflamada?',options:['Cubrirla con acrílico','Suspender el servicio y recomendar valoración','Limarla más fuerte'],answer:1}},
 {title:'Herramientas y preparación',tag:'Fundamentos',duration:'5 h',overview:'Elegir herramientas, preparar la superficie sin debilitar la uña y conocer diferentes formas.',lessons:[['Limas y abrasivos','Elige grano y presión según la tarea: evita desgastar excesivamente la placa natural. Una uña debilitada no soporta un servicio seguro.','Clasifica tus limas y anota para qué usarías cada una.'],['Preparación sin daño','Limpia, observa, da forma al borde libre y retira cuidadosamente residuos superficiales. No cortes tejido vivo.','Practica forma cuadrada y ovalada en diez tips.'],['Manejo del torno','Un torno puede causar quemaduras o lesiones por presión. Practica primero sobre tips y no lo uses sobre piel o uña natural sin formación presencial adecuada.','Prepara tu estación e identifica riesgos por polvo y fricción.']],materials:['Limas','Buffer','Cepillo','Tips de práctica','Soporte de tips'],practice:'Realiza diez preparaciones documentadas con fotos de antes y después.',video:search('preparación de la uña natural para esmaltado profesional'),quiz:{q:'¿Qué debes evitar al preparar una uña natural?',options:['Revisar su condición','Limar hasta adelgazar la placa','Limpiar residuos'],answer:1}},
@@ -41,9 +20,9 @@ const theoryAdditions=[["La anatomía sirve para diferenciar superficies resiste
 
 modules.forEach((m,mi)=>{
  m.lessons=m.lessons.map((l,li)=>[l[0],l[1],l[2],theoryAdditions[mi][li]]);
- m.videos=verifiedVideos[mi]?[verifiedVideos[mi]]:[];
- m.videoSearchQuery=moduleSearchQueries[mi];
- m.videoReviewStatus=m.videos.length?'Enlace identificado; la inserción depende de YouTube':'Pendiente de selección y validación audiovisual';
+ m.videos=m.lessons.map((lesson,li)=>({id:`m${String(mi+1).padStart(2,'0')}_l${String(li+1).padStart(2,'0')}`,title:lesson[0],src:`/videos/m${String(mi+1).padStart(2,'0')}_l${String(li+1).padStart(2,'0')}.mp4`,source:'Mariana Nails · Microlección visual original (sin audio)'}));
+ m.videoTopics=[];
+ m.videoReviewStatus='3 microlecciones visuales originales, sin audio; las demostraciones prácticas presenciales o grabadas están pendientes';
 });
 // Detectar asignaciones repetidas antes del arranque del servidor.
 const assignedVideoIds=modules.flatMap(m=>m.videos.map(v=>v.id));
